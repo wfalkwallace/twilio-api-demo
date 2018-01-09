@@ -28,12 +28,13 @@ const html = `
   <div>
     <label for="number">Number: </label>
     <input type="text" id="number" name="number" required
+           value="+19176793449"
            placeholder="+12223334444" pattern="[+]1[0-9]{10}"
            style="">
   </div>
   <div>
     <label for="message">Message: </label>
-    <textarea id="message" name="message"></textarea>
+    <input type="text" id="message" name="message" required>
   </div>
   <button>Submit</button>
 </form>
@@ -52,28 +53,37 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
-  console.log(`WILL: ${req.body.number}/${TWILIO_NUMBER}`);
   client.messages
     .create({
       to: req.body.number,
       from: TWILIO_NUMBER,
       body: req.body.message,
-    })
-    .then((message, err) => {
-      console.log(`WILL: ${JSON.stringify(message)}`);
-      console.log(`WILL: ${JSON.stringify(err)}`);
-      res.status(200)
-         .send(message.sid)
-         .end();
+    }, (err, message) => {
+      if (err) {
+        res.status(err.status)
+           .send(err.message)
+           .end();
+      } else {
+        res.status(200)
+           .send(`Sent: #${message.sid}<br>
+                  To: ${message.to}<br>
+                  Body: ${message.body}<br>
+                  On: ${message.dateSent}`)
+           .end();
+      }
     });
 });
 
 app.post('/receive', (req, res) => {
-  console.log(`WILL: ${JSON.stringify(req.body)}`)
-
   const twiml = new MessagingResponse();
 
-  twiml.message('This is a response.');
+  if (req.body.message == "yes") {
+    twiml.message(`You said "yes." Woohooooo!`);
+  } else if (req.body.message == "no") {
+    twiml.message(`You said "no." :'(`);
+  } else {
+    twiml.message(`"${req.body.message}" is not "yes" or "no"`);
+  }
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
