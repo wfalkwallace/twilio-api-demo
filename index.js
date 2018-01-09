@@ -52,6 +52,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
+  console.log(`WILL: ${JSON.stringify(req.body)}`);
   client.messages
     .create({
       to: req.body.number,
@@ -59,7 +60,7 @@ app.post('/send', (req, res) => {
       body: req.body.message,
     })
     .then(message => {
-      console.log(`WILL: ${JSON.stringify(message)}`)
+      console.log(`WILL: ${JSON.stringify(message)}`);
       res.status(200)
          .send(message.sid)
          .end();
