@@ -16,11 +16,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const html = `
 <style>
   input:invalid {
-    border: 2px dashed red;
+    border: 1px solid red;
   }
 
   input:valid {
-    border: 2px solid black;
+    border: 1px solid green;
+  }
+
+  #number:invalid+span:before,
+  #msg:invalid+span:before {
+      content: " ✗ ";
+      color: red;
+  }
+
+  #number:valid+span:before,
+  #msg:valid+span:before {
+      content: " ✓ ";
+      color: green;
   }
 </style>
 <h1>Welcome to Will's demo Twilio bot.</h1>
@@ -30,11 +42,15 @@ const html = `
     <input type="text" id="number" name="number" required
            placeholder="+12223334444" pattern="[+]1[0-9]{10}"
            style="">
+    <span>&nbsp;</span>
   </div>
+  <br>
   <div>
     <label for="msg">Message: </label>
     <input type="text" id="msg" name="msg" rows=3 required>
+    <span>&nbsp;</span>
   </div>
+  <br>
   <button>Submit</button>
 </form>
 `;
@@ -67,7 +83,8 @@ app.post('/send', (req, res) => {
            .send(`ID: ${message.sid}<br>
                   To: ${message.to}<br>
                   Body: ${message.body}<br>
-                  Created: ${message.dateCreated}`)
+                  Created: ${message.dateCreated}<br>
+                  <a href='/'>Back</a>`)
            .end();
       }
     });
