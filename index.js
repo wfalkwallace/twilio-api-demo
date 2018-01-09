@@ -28,13 +28,12 @@ const html = `
   <div>
     <label for="number">Number: </label>
     <input type="text" id="number" name="number" required
-           value="+19176793449"
            placeholder="+12223334444" pattern="[+]1[0-9]{10}"
            style="">
   </div>
   <div>
-    <label for="message">Message: </label>
-    <input type="text" id="message" name="message" required>
+    <label for="msg">Message: </label>
+    <input type="text" id="msg" name="msg" rows=3 required>
   </div>
   <button>Submit</button>
 </form>
@@ -57,7 +56,7 @@ app.post('/send', (req, res) => {
     .create({
       to: req.body.number,
       from: TWILIO_NUMBER,
-      body: req.body.message,
+      body: req.body.msg,
     }, (err, message) => {
       if (err) {
         res.status(err.status)
@@ -65,10 +64,10 @@ app.post('/send', (req, res) => {
            .end();
       } else {
         res.status(200)
-           .send(`Sent: #${message.sid}<br>
+           .send(`ID: ${message.sid}<br>
                   To: ${message.to}<br>
                   Body: ${message.body}<br>
-                  On: ${message.dateCreated}`)
+                  Created: ${message.dateCreated}`)
            .end();
       }
     });
@@ -76,13 +75,12 @@ app.post('/send', (req, res) => {
 
 app.post('/receive', (req, res) => {
   const twiml = new MessagingResponse();
-  console.log(req.body)
-  if (req.body.message == "yes") {
+  if (req.body.Body == "yes") {
     twiml.message(`You said "yes." Woohooooo!`);
-  } else if (req.body.message == "no") {
+  } else if (req.body.Body == "no") {
     twiml.message(`You said "no." :'(`);
   } else {
-    twiml.message(`"${req.body.message}" is not "yes" or "no"`);
+    twiml.message(`"${req.body.Body}" is not "yes" or "no"`);
   }
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
