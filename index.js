@@ -59,8 +59,9 @@ app.post('/send', (req, res) => {
       from: TWILIO_NUMBER,
       body: req.body.message,
     })
-    .then(message => {
+    .then((message, err) => {
       console.log(`WILL: ${JSON.stringify(message)}`);
+      console.log(`WILL: ${JSON.stringify(err)}`);
       res.status(200)
          .send(message.sid)
          .end();
