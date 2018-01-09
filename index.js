@@ -68,7 +68,7 @@ app.post('/send', (req, res) => {
            .send(`Sent: #${message.sid}<br>
                   To: ${message.to}<br>
                   Body: ${message.body}<br>
-                  On: ${message.dateSent}`)
+                  On: ${message.dateCreated}`)
            .end();
       }
     });
@@ -76,7 +76,7 @@ app.post('/send', (req, res) => {
 
 app.post('/receive', (req, res) => {
   const twiml = new MessagingResponse();
-
+  console.log(req.body)
   if (req.body.message == "yes") {
     twiml.message(`You said "yes." Woohooooo!`);
   } else if (req.body.message == "no") {
