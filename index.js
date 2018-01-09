@@ -1,5 +1,6 @@
 const express = require('express');
 const twilio = require('twilio');
+const bodyParser = require('body-parser');
 const MessagingResponse = twilio.twiml.MessagingResponse;
 
 const PORT = process.env.PORT || 5000;
@@ -51,23 +52,22 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
-  console.log(`WILL: ${JSON.stringify(request.body)}`)
-  // client.messages
-  //   .create({
-  //     to: '+19176793449',
-  //     from: TWILIO_NUMBER,
-  //     body: 'yes?',
-  //   })
-  //   .then(message => {
-  //     console.log(`WILL: ${JSON.stringify(message)}`)
-  //     res.status(200)
-  //        .send(message.sid)
-  //        .end();
-  //   });
+  client.messages
+    .create({
+      to: req.body.number,
+      from: TWILIO_NUMBER,
+      body: req.body.message,
+    })
+    .then(message => {
+      console.log(`WILL: ${JSON.stringify(message)}`)
+      res.status(200)
+         .send(message.sid)
+         .end();
+    });
 });
 
 app.post('/receive', (req, res) => {
-  console.log(`WILL: ${JSON.stringify(request.body)}`)
+  console.log(`WILL: ${JSON.stringify(req.body)}`)
 
   const twiml = new MessagingResponse();
 
