@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const twilio = require('twilio');
 const MessagingResponse = twilio.twiml.MessagingResponse;
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 const accountSid = process.env.accountSid;
 const authToken = process.env.authToken;
 const client = twilio(accountSid, authToken);
