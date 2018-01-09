@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', (req, res) => {
-  console.log(`WILL: ${JSON.stringify(req.body)}`);
+  console.log(`WILL: ${req.body.number}/${TWILIO_NUMBER}`);
   client.messages
     .create({
       to: req.body.number,
