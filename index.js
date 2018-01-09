@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const twilio = require('twilio');
 const MessagingResponse = twilio.twiml.MessagingResponse;
 
@@ -11,6 +10,7 @@ const client = twilio(ACCOUNT_SID, AUTH_TOKEN);
 
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const html = `
 <style>
@@ -36,7 +36,7 @@ const html = `
   </div>
   <button>Submit</button>
 </form>
-`
+`;
 
 app.get('/robots.txt', (req, res) => {
   res.status(200)
