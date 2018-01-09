@@ -27,7 +27,7 @@ const html = `
   <div>
     <label for="number">Number: </label>
     <input type="text" id="number" name="number" required
-           placeholder="+12223334444" pattern="[+]1[0-9]{7}"
+           placeholder="+12223334444" pattern="[+]1[0-9]{10}"
            style="">
   </div>
   <div>
