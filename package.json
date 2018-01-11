@@ -9,14 +9,14 @@
   "author": "wfalkwallace",
   "license": "UNLICENSED",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/wfalkwallace/twilio-api-demo.git"
+    "type": "git",
+    "url": "https://github.com/wfalkwallace/twilio-api-demo.git"
   },
   "homepage": "https://github.com/wfalkwallace/twilio-api-demo",
   "private": true,
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.15.4",
+    "express": "^4.16.2",
     "twilio": "^3.11.0"
   },
   "devDependencies": {
