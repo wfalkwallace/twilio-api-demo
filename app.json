@@ -1,7 +1,7 @@
 {
   "name": "Twilio API Demo",
   "description": "A barebones Node.js app using Express and the Twilio API",
-  "repository": "https://github.com/wfalkwallace/twilio-demo",
+  "repository": "https://github.com/wfalkwallace/twilio-api-demo",
   "keywords": ["node", "express", "static", "twilio"],
   "env": {
     "TWILIO_NUMBER": {
@@ -10,11 +10,11 @@
     },
     "AUTH_TOKEN": {
       "description": "Your account's auth token (you can find this on your account overview page).",
-      "generator": "secret"
+      "value": "some-long-secret-string"
     },
     "ACCOUNT_SID": {
       "description": "Your account's SID (you can find this on your account overview page).",
-      "generator": "secret"
+      "value": "some-long-secret-string"
     }
   }
 }

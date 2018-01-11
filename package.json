@@ -3,14 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "validate": "app.json validate"
   },
   "author": "wfalkwallace",
   "license": "UNLICENSED",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/wfalkwallace/twilio-api-demo.git"
+  },
+  "homepage": "https://github.com/wfalkwallace/twilio-api-demo",
   "private": true,
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.15.4",
     "twilio": "^3.11.0"
+  },
+  "devDependencies": {
+    "app.json": "^1.3.0"
   }
 }
