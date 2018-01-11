@@ -1,0 +1,24 @@
+{
+  "name": "Twilio API Demo",
+  "description": "A barebones Node.js app using Express and the Twilio API",
+  "repository": "https://github.com/wfalkwallace/twilio-demo",
+  "keywords": ["node", "express", "static", "twilio"],
+  "env": {
+    "TWILIO_NUMBER": {
+      "description": "A valid twilio number (of the form +12223334444) with SMS capability that is connected to your account.",
+      "value": "+12223334444"
+    },
+    "AUTH_TOKEN": {
+      "description": "Your account's auth token (you can find this on your account overview page).",
+      "generator": "secret"
+    },
+    "ACCOUNT_SID": {
+      "description": "Your account's SID (you can find this on your account overview page).",
+      "generator": "secret"
+    }
+  }
+}
+
+
+
+

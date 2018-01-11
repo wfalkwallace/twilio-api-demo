@@ -92,14 +92,7 @@ app.post('/send', (req, res) => {
 
 app.post('/receive', (req, res) => {
   const twiml = new MessagingResponse();
-  if (req.body.Body == "yes") {
-    twiml.message(`You said "yes." Woohooooo!`);
-  } else if (req.body.Body == "no") {
-    twiml.message(`You said "no." :'(`);
-  } else {
-    twiml.message(`"${req.body.Body}" is not "yes" or "no"`);
-  }
-
+  twiml.message(`You said: "${req.body.Body}"`);
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
 });
